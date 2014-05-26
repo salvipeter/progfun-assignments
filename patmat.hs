@@ -14,7 +14,7 @@ makeCodeTree l r = Fork l r (chars l ++ chars r) (weight l + weight r)
 times []       = []
 times (x:xs) = (x, length (filter (== x) xs) + 1) : times (filter (/= x) xs)
 
-makeOrderedLeafList f = map (uncurry Leaf) $ sortWith snd f
+makeOrderedLeafList = map (uncurry Leaf) . sortWith snd
 
 singleton [_] = True
 singleton _   = False
