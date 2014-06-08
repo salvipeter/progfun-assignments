@@ -40,18 +40,14 @@ startBlock :: Reader Level Block
 startBlock = do sp <- asks startPos
                 return $ Block sp sp
 
-left  b                               | isStanding b = blockDy b (-2, -1)
-left  b@(Block (Pos px _) (Pos qx _)) | px == qx     = blockDy b (-1, -2)
-left  b                                              = blockDy b (-1, -1)
-right b                               | isStanding b = blockDy b ( 1,  2)
-right b@(Block (Pos px _) (Pos qx _)) | px == qx     = blockDy b ( 2,  1)
-right b                                              = blockDy b ( 1,  1)
-up    b                               | isStanding b = blockDx b (-2, -1)
-up    b@(Block (Pos px _) (Pos qx _)) | px == qx     = blockDx b (-1, -1)
-up    b                                              = blockDx b (-1, -2)
-down  b                               | isStanding b = blockDx b ( 1,  2)
-down  b@(Block (Pos px _) (Pos qx _)) | px == qx     = blockDx b ( 1,  1)
-down  b                                              = blockDx b ( 2,  1)
+movement f s _ _ b                               | isStanding b = f b s
+movement f _ x _ b@(Block (Pos px _) (Pos qx _)) | px == qx     = f b x
+movement f _ _ y b                                              = f b y
+
+left  = movement blockDy (-2, -1) (-1, -2) (-1, -1)
+right = movement blockDy ( 1,  2) ( 2,  1) ( 1,  1)
+up    = movement blockDx (-2, -1) (-1, -1) (-1, -2)
+down  = movement blockDx ( 1,  2) ( 1,  1) ( 2,  1)
 
 -- 3a
 neighbors :: Block -> [(Block, Move)]
