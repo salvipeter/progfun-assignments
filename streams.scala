@@ -77,7 +77,7 @@ trait Solver extends GameDef {
 
   // ex. 4b
   def neighborsWithHistory(b: Block, history: List[Move]): Stream[(Block, List[Move])] = {
-    // thi implementation defeats the purpose of lazy streams...
+    // this implementation defeats the purpose of lazy streams...
     // but it should be OK, as legalNeighbors has at most 4 items
     (for (neighbor <- b.legalNeighbors)
      yield (neighbor._1, neighbor._2 :: history)).toStream

@@ -21,7 +21,7 @@ blockDy (Block p q) (d1, d2) = Block (posDy p d1) (posDy q d2)
 terrainFunction :: Array Int (Array Int Char) -> Pos -> Bool
 terrainFunction t (Pos x _) | not $ inRange (bounds t) x       = False
 terrainFunction t (Pos _ y) | not $ inRange (bounds (t ! 0)) y = False
-terrainFunction t (Pos x y)                                    = (t ! x) ! y /= '-'
+terrainFunction t (Pos x y)                                    = t ! x ! y /= '-'
 -- 1b
 findChar :: Char -> Array Int (Array Int Char) -> Pos
 findChar c t = let x = fst $ head $ filter (elem c . elems . snd) $ assocs t
