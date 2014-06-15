@@ -85,7 +85,7 @@ pathsToGoal = do paths <- pathsFromStart
 -- 4e/3
 solution :: Reader Level [Move]
 solution = do paths <- pathsToGoal
-              return $ if null paths then [] else snd $ fmap reverse (head paths)
+              return $ if null paths then [] else reverse $ snd (head paths)
 
 -- Test
 
