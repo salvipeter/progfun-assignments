@@ -107,5 +107,5 @@ trait Solver extends GameDef {
   lazy val pathsToGoal: Stream[(Block, List[Move])] =
     pathsFromStart.filter((x: (Block, List[Move])) => done(x._1))
   // ex. 4e/3
-  lazy val solution: List[Move] = if (pathsToGoal.isEmpty) Nil else pathsToGoal.head._2
+  lazy val solution: List[Move] = if (pathsToGoal.isEmpty) Nil else pathsToGoal.head._2.reverse
 }

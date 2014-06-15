@@ -95,9 +95,16 @@
   (let [paths (paths-to-goal)]
     (if (empty? paths)
       ()
-      (second (first paths)))))
+      (reverse (second (first paths))))))
 
 ;;; Test
+
+(def level0
+  ["------"
+   "--ST--"
+   "--oo--"
+   "--oo--"
+   "------"])
 
 (def level1
   ["ooo-------"

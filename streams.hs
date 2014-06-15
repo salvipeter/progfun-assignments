@@ -85,7 +85,7 @@ pathsToGoal = do paths <- pathsFromStart
 -- 4e/3
 solution :: Reader Level [Move]
 solution = do paths <- pathsToGoal
-              return $ if null paths then [] else snd (head paths)
+              return $ if null paths then [] else snd $ fmap reverse (head paths)
 
 -- Test
 
@@ -94,6 +94,12 @@ readLevel xs = Level (terrainFunction a) (findChar 'S' a) (findChar 'T' a)
   where n = length xs
         m = length (head xs)
         a = listArray (0, n-1) $ map (listArray (0, m-1)) xs
+
+level0 = ["------",
+          "--ST--",
+          "--oo--",
+          "--oo--",
+          "------"]
 
 level1 = ["ooo-------",
           "oSoooo----",
